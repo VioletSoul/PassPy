@@ -4,12 +4,14 @@ from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import Qt
 
-# Dictionary with account names and passwords
-PASSWORDS = {
-    'VioletSoul': 'pass1',
-    'admin': 'pass2',
-    'user': 'pass3'
-}
+# List of accounts: each is a dict with resource, login, and password
+ACCOUNTS = [
+    {'resource': 'GitHub', 'login': 'admin', 'password': 'ghp_pass'},
+    {'resource': 'GitHub', 'login': 'user', 'password': 'ghu_pass'},
+    {'resource': 'Router', 'login': 'admin', 'password': 'router_admin_pass'},
+    {'resource': 'Router', 'login': 'user', 'password': 'router_user_pass'},
+    {'resource': 'Server', 'login': 'admin', 'password': 'server_admin_pass'},
+]
 
 # Define the path to the icon relative to the project folder
 BASE_DIR = Path(__file__).parent.resolve()
@@ -47,9 +49,10 @@ menu = QMenu()
 actions = []
 
 # Add menu items for each account
-for name, pwd in PASSWORDS.items():
-    action = QAction(name, tray)
-    action.triggered.connect(lambda checked, p=pwd: copy_password(p))
+for account in ACCOUNTS:
+    label = f"{account['resource']} — {account['login']}"
+    action = QAction(label, tray)
+    action.triggered.connect(lambda checked, p=account['password']: copy_password(p))
     menu.addAction(action)
     actions.append(action)
 
