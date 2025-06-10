@@ -1,14 +1,14 @@
 # Password Tray App
 
 A simple and cross-platform system tray application written in Python using PyQt5.  
-It allows you to quickly copy passwords for different accounts directly from your system tray.
+It allows you to quickly copy passwords for different accounts and resources directly from your system tray.
 
 ---
 
 ## ✨ Features
 
 - **Quick access** to passwords from the tray menu
-- **Customizable** account names and passwords
+- **Supports multiple resources and logins** (e.g., several "admin" accounts for different services)
 - **Custom tray icon** support (with fallback to a default blue icon)
 - **Cross-platform:** works on Windows, macOS, and Linux
 
@@ -37,7 +37,7 @@ It allows you to quickly copy passwords for different accounts directly from you
 
 2. The app icon will appear in your system tray.
 3. **Right-click** the tray icon to open the menu.
-4. Click an account name to **copy its password** to the clipboard.
+4. Click a menu item (formatted as `Resource — Login`) to **copy its password** to the clipboard.
 5. Select **"Exit"** to close the application.
 
 ---
@@ -45,13 +45,14 @@ It allows you to quickly copy passwords for different accounts directly from you
 ## ⚙️ Customization
 
 - **Add or remove accounts:**  
-  Edit the `PASSWORDS` dictionary in the script to set your own account names and passwords.
+  Edit the `ACCOUNTS` list in the script to set your own resources, logins, and passwords.
 
     ```
-    PASSWORDS = {
-        'MyAccount': 'my_password',
-        'AnotherAccount': 'another_password'
-    }
+    ACCOUNTS = [
+        {'resource': 'GitHub', 'login': 'admin', 'password': 'ghp_pass'},
+        {'resource': 'Email', 'login': 'admin', 'password': 'mail_admin_pass'},
+        {'resource': 'Server', 'login': 'root', 'password': 'server_root_pass'},
+    ]
     ```
 
 - **Change the tray icon:**  
@@ -80,3 +81,4 @@ MIT License
 ## 👤 Author
 
 Created by VioletSoul
+
