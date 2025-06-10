@@ -1,69 +1,72 @@
 import sys
+from pathlib import Path
 from PyQt5.QtWidgets import QApplication, QSystemTrayIcon, QMenu, QAction
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtCore import Qt
 
-# Словарь с именами аккаунтов и паролями
+# Dictionary with account names and passwords
 PASSWORDS = {
     'VioletSoul': 'pass1',
     'admin': 'pass2',
     'user': 'pass3'
 }
 
-# Путь к пользовательской иконке (PNG). Если пусто — будет создана синяя иконка.
-ICON_PATH = 'path/to/your/icon.png'  # Укажи свой путь или оставь пустым
+# Define the path to the icon relative to the project folder
+BASE_DIR = Path(__file__).parent.resolve()
+ICON_PATH = BASE_DIR / 'icon.png'
 
 def copy_password(password):
-    """Копирует переданный пароль в системный буфер обмена."""
+    """Copies the given password to the system clipboard."""
     clipboard = QApplication.clipboard()
     clipboard.setText(password)
-    print(f'[INFO] Скопировано: {password}')
+    print(f'[INFO] Copied: {password}')
 
 app = QApplication(sys.argv)
 
-# Загружаем пользовательскую иконку или создаём синюю по умолчанию
-if ICON_PATH and ICON_PATH != '':
-    icon = QIcon(ICON_PATH)
+# Load the custom icon or create a default blue one
+if ICON_PATH.exists():
+    icon = QIcon(str(ICON_PATH))
     if icon.isNull():
-        print(f'[WARNING] Не удалось загрузить иконку: {ICON_PATH}. Используется иконка по умолчанию.')
+        print(f'[WARNING] Failed to load icon: {ICON_PATH}. Using default icon.')
         pixmap = QPixmap(64, 64)
         pixmap.fill(Qt.blue)
         icon = QIcon(pixmap)
 else:
+    print(f'[WARNING] Icon not found: {ICON_PATH}. Using default icon.')
     pixmap = QPixmap(64, 64)
     pixmap.fill(Qt.blue)
     icon = QIcon(pixmap)
 
-# Создаём иконку в системном трее
+# Create a system tray icon
 tray = QSystemTrayIcon(icon)
 
-# Формируем контекстное меню для иконки
+# Create the context menu for the tray icon
 menu = QMenu()
 
-# Сохраняем действия, чтобы они не были удалены сборщиком мусора
+# Store actions to prevent them from being garbage collected
 actions = []
 
-# Добавляем пункты меню для каждого аккаунта
+# Add menu items for each account
 for name, pwd in PASSWORDS.items():
     action = QAction(name, tray)
     action.triggered.connect(lambda checked, p=pwd: copy_password(p))
     menu.addAction(action)
     actions.append(action)
 
-# Добавляем пункт для выхода из приложения
-exit_action = QAction("Выход", tray)
+# Add an exit action
+exit_action = QAction("Exit", tray)
 exit_action.triggered.connect(app.quit)
 menu.addAction(exit_action)
 actions.append(exit_action)
 
-# Привязываем меню к иконке и показываем её в трее
+# Attach the menu to the tray icon and show it
 tray.setContextMenu(menu)
 tray.setVisible(True)
 tray.show()
 
-# Сохраняем ссылки на меню и действия для предотвращения их удаления
+# Store references to menu and actions to prevent garbage collection
 tray.menu = menu
 tray.actions = actions
 
-# Запускаем основной цикл приложения
+# Run the main application loop
 sys.exit(app.exec_())
