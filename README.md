@@ -1,5 +1,11 @@
 # Password Tray App
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![PyQt5](https://img.shields.io/badge/PyQt5-41CD52?style=flat&logo=qt&logoColor=white)
+![Tray App](https://img.shields.io/badge/Tray_App-✓-blue)
+![Cross-platform](https://img.shields.io/badge/Cross--platform-✓-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
 A simple and cross-platform system tray application written in Python using PyQt5.  
 It allows you to quickly copy passwords for different accounts and resources directly from your system tray.
 
@@ -81,4 +87,3 @@ MIT License
 ## 👤 Author
 
 Created by VioletSoul
-
