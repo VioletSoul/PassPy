@@ -1,5 +1,11 @@
 # Приложение Password Tray
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![PyQt5](https://img.shields.io/badge/PyQt5-41CD52?style=flat&logo=qt&logoColor=white)
+![Tray App](https://img.shields.io/badge/Tray_App-✓-blue)
+![Cross-platform](https://img.shields.io/badge/Cross--platform-✓-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
+
 Простое и кроссплатформенное приложение для системного трея, написанное на Python с использованием PyQt5.  
 Позволяет быстро копировать пароли для разных аккаунтов и ресурсов прямо из системного трея.
 
