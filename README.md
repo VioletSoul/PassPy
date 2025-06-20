@@ -5,6 +5,8 @@
 ![Tray App](https://img.shields.io/badge/Tray_App-✓-blue)
 ![Cross-platform](https://img.shields.io/badge/Cross--platform-✓-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+[![Stars](https://img.shields.io/github/stars/VioletSoul/PassPy.svg?style=social)](https://github.com/VioletSoul/PassPy)
+[![Last Commit](https://img.shields.io/github/last-commit/VioletSoul/PassPy.svg)](https://github.com/VioletSoul/PassPy/commits/main)
 
 A simple and cross-platform system tray application written in Python using PyQt5.  
 It allows you to quickly copy passwords for different accounts and resources directly from your system tray.
